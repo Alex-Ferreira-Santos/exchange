@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  database:
+    image: postgres:15
+    container_name: database
+    ports:
+      - 5432:5432
+    networks:
+      - exchange-network
+    environment:
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=exchange
+      - POSTGRES_USER=admin
+
+networks:
+  exchange-network:
