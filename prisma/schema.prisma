@@ -41,10 +41,18 @@ model Wallet_Stocks {
 }
 
 model Stock {
-  stock_id      String          @id @default(uuid())
-  name          String
-  current_price Int
-  wallet_stock  Wallet_Stocks[]
+  stock_id     String          @id @default(uuid())
+  name         String
+  wallet_stock Wallet_Stocks[]
+  Stock_Prices Stock_Prices[]
+}
+
+model Stock_Prices {
+  stock_price_id String   @id @default(uuid())
+  created_at     DateTime
+  price          Int
+  stock_id       String
+  stock          Stock    @relation(fields: [stock_id], references: [stock_id])
 }
 
 model Wallet_Reits {
@@ -56,10 +64,18 @@ model Wallet_Reits {
 }
 
 model Reit {
-  reit_id       String         @id @default(uuid())
-  name          String
-  current_price Int
-  wallet_reits  Wallet_Reits[]
+  reit_id      String         @id @default(uuid())
+  name         String
+  wallet_reits Wallet_Reits[]
+  Reit_Prices  Reit_Prices[]
+}
+
+model Reit_Prices {
+  stock_price_id String   @id @default(uuid())
+  created_at     DateTime
+  price          Int
+  reit_id        String
+  reit           Reit     @relation(fields: [reit_id], references: [reit_id])
 }
 
 model Wallet_ETFS {
@@ -71,10 +87,18 @@ model Wallet_ETFS {
 }
 
 model ETF {
-  etf_id        String        @id @default(uuid())
-  name          String
-  current_price Int
-  wallet_ETFS   Wallet_ETFS[]
+  etf_id      String        @id @default(uuid())
+  name        String
+  wallet_ETFS Wallet_ETFS[]
+  ETF_Prices  ETF_Prices[]
+}
+
+model ETF_Prices {
+  stock_price_id String   @id @default(uuid())
+  created_at     DateTime
+  price          Int
+  etf_id         String
+  etf            ETF      @relation(fields: [etf_id], references: [etf_id])
 }
 
 model Order {
