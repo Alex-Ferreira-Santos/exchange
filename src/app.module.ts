@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common'
 import { ClientsModule } from './modules/clients/clients.module'
 import { PrismaModule } from './modules/prisma/prisma.module'
 import { ConfigModule } from '@nestjs/config'
+import { WalletsModule } from './modules/wallets/wallets.module'
 
 @Module({
   imports: [
@@ -9,7 +10,8 @@ import { ConfigModule } from '@nestjs/config'
       isGlobal: true
     }),
     ClientsModule,
-    PrismaModule
+    PrismaModule,
+    WalletsModule
   ],
   controllers: [],
   providers: []

@@ -14,8 +14,16 @@ datasource db {
 }
 
 model Client {
-  client_id  String @id @default(uuid())
+  client_id  String   @id @default(uuid())
   name       String
-  email      String @unique
-  identifier String @unique
+  email      String   @unique
+  identifier String   @unique
+  wallets    Wallet[]
+}
+
+model Wallet {
+  wallet_id String @id @default(uuid())
+  name String
+  client_id String
+  client    Client @relation(fields: [client_id], references: [client_id])
 }
