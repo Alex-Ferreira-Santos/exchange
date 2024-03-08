@@ -19,11 +19,83 @@ model Client {
   email      String   @unique
   identifier String   @unique
   wallets    Wallet[]
+  Order      Order[]
 }
 
 model Wallet {
-  wallet_id String @id @default(uuid())
-  name String
+  wallet_id     String          @id @default(uuid())
+  name          String
+  client_id     String
+  client        Client          @relation(fields: [client_id], references: [client_id])
+  wallet_stocks Wallet_Stocks[]
+  Wallet_Reits  Wallet_Reits[]
+  Wallet_ETFS   Wallet_ETFS[]
+}
+
+model Wallet_Stocks {
+  wallet_stock_id String @id @default(uuid())
+  wallet_id       String
+  wallet          Wallet @relation(fields: [wallet_id], references: [wallet_id])
+  stock_id        String
+  stock           Stock  @relation(fields: [stock_id], references: [stock_id])
+}
+
+model Stock {
+  stock_id      String          @id @default(uuid())
+  name          String
+  current_price Int
+  wallet_stock  Wallet_Stocks[]
+}
+
+model Wallet_Reits {
+  wallet_stock_id String @id @default(uuid())
+  wallet_id       String
+  wallet          Wallet @relation(fields: [wallet_id], references: [wallet_id])
+  reit_id         String
+  reit            Reit   @relation(fields: [reit_id], references: [reit_id])
+}
+
+model Reit {
+  reit_id       String         @id @default(uuid())
+  name          String
+  current_price Int
+  wallet_reits  Wallet_Reits[]
+}
+
+model Wallet_ETFS {
+  wallet_stock_id String @id @default(uuid())
+  wallet_id       String
+  wallet          Wallet @relation(fields: [wallet_id], references: [wallet_id])
+  etf_id          String
+  etf             ETF    @relation(fields: [etf_id], references: [etf_id])
+}
+
+model ETF {
+  etf_id        String        @id @default(uuid())
+  name          String
+  current_price Int
+  wallet_ETFS   Wallet_ETFS[]
+}
+
+model Order {
+  order_id       String         @id @default(uuid())
+  amount         Int
+  price_per_unit Int
+  type           OrderType
+  item_id        String
+  item_type      OrderItemsType
+
   client_id String
   client    Client @relation(fields: [client_id], references: [client_id])
+}
+
+enum OrderType {
+  BUY
+  SELL
+}
+
+enum OrderItemsType {
+  Stocks
+  Reits
+  ETFS
 }
