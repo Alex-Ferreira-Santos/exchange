@@ -3,6 +3,7 @@ import { ClientsModule } from './modules/clients/clients.module'
 import { PrismaModule } from './modules/prisma/prisma.module'
 import { ConfigModule } from '@nestjs/config'
 import { WalletsModule } from './modules/wallets/wallets.module'
+import { StocksModule } from './modules/stocks/stocks.module';
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import { WalletsModule } from './modules/wallets/wallets.module'
     }),
     ClientsModule,
     PrismaModule,
-    WalletsModule
+    WalletsModule,
+    StocksModule
   ],
   controllers: [],
   providers: []
