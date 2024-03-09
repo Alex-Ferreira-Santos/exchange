@@ -4,5 +4,5 @@ export class CreateOrderDto {
   type: 'BUY' | 'SELL'
   item_id: string
   item_type: 'STOCKS' | 'REITS' | 'ETFS'
-  client_id: string
+  wallet_id: string
 }

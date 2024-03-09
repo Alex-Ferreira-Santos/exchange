@@ -11,7 +11,7 @@ export class CreateOrderUseCase {
   async execute(dto: CreateOrderDto) {
     const order = new Order({
       amount: dto.amount,
-      client_id: dto.client_id,
+      wallet_id: dto.wallet_id,
       item_id: dto.item_id,
       item_type: dto.item_type,
       price_per_unit: dto.price_per_unit,

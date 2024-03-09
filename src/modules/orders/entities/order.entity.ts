@@ -15,7 +15,7 @@ type TOrderEntityConstructor = {
   item_id: string
   item_type: 'STOCKS' | 'REITS' | 'ETFS'
   situation: keyof typeof OrderSitatuationEnum
-  client_id: string
+  wallet_id: string
 }
 
 export class Order {
@@ -26,7 +26,7 @@ export class Order {
   item_id: string
   item_type: 'STOCKS' | 'REITS' | 'ETFS'
   situation: keyof typeof OrderSitatuationEnum
-  client_id: string
+  wallet_id: string
   errors: string[]
 
   constructor(props: TOrderEntityConstructor) {
@@ -37,7 +37,7 @@ export class Order {
     this.item_id = props.item_id
     this.item_type = props.item_type
     this.situation = props.situation
-    this.client_id = props.client_id
+    this.wallet_id = props.wallet_id
     this.validate()
   }
 
@@ -55,7 +55,7 @@ export class Order {
     return this.errors.length > 0
   }
 
-  changeSituation(newSituation: OrderSitatuationEnum){
+  changeSituation(newSituation: keyof typeof OrderSitatuationEnum){
     this.situation = newSituation
   }
 }

@@ -16,16 +16,16 @@ export class OrderRepository {
         price_per_unit: order.price_per_unit,
         situation: order.situation,
         type: order.type,
-        client_id: order.client_id
+        wallet_id: order.wallet_id
       }
     })
     return createdOrder
   }
 
-  async listOrdersByClientId(client_id: string) {
+  async listOrdersByWalletId(wallet_id: string) {
     const orders = await this.prismaService.order.findMany({
       where: {
-        client_id: { equals: client_id }
+        wallet_id: { equals: wallet_id }
       }
     })
     return orders

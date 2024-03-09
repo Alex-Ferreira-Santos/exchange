@@ -12,7 +12,7 @@ import { CreateWalletUseCase } from './usecases/create-wallet.usecase'
 import { UpdateWalletUseCase } from './usecases/update-wallet.usecase'
 import { GetWalletUseCase } from './usecases/get-wallet.usecase'
 import { CreateOrderDto } from './dto/create-order.dto'
-import { ListOrderByClientIdUseCase } from './usecases/list-order-by-client-id.usecase'
+import { ListOrderByWalletIdUseCase } from './usecases/list-order-by-wallet-id.usecase'
 import { CreateOrderUseCase } from './usecases/create-order.usecase'
 
 @Controller('wallets')
@@ -21,7 +21,7 @@ export class WalletsController {
     private readonly createWalletUseCase: CreateWalletUseCase,
     private readonly updateWalletUseCase: UpdateWalletUseCase,
     private readonly getWalletUseCase: GetWalletUseCase,
-    private readonly listOrderByClientId: ListOrderByClientIdUseCase,
+    private readonly listOrderByWalletIdUseCase: ListOrderByWalletIdUseCase,
     private readonly createOrderUseCase: CreateOrderUseCase
     ) {}
 
@@ -47,6 +47,6 @@ export class WalletsController {
 
   @Get(':id/orders')
   getOrderByClientId(@Param('id') client_id: string) {
-    return this.listOrderByClientId.execute(client_id)
+    return this.listOrderByWalletIdUseCase.execute(client_id)
   }
 }
