@@ -108,6 +108,7 @@ model Order {
   type           OrderType
   item_id        String
   item_type      OrderItemsType
+  situation      OrderSituation
 
   client_id String
   client    Client @relation(fields: [client_id], references: [client_id])
@@ -119,7 +120,14 @@ enum OrderType {
 }
 
 enum OrderItemsType {
-  Stocks
-  Reits
+  STOCKS
+  REITS
   ETFS
+}
+
+enum OrderSituation {
+  OPEN
+  EXECUTED
+  REFUSED
+  CLOSED
 }
