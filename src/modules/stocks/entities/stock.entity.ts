@@ -7,7 +7,7 @@ type TStockEntityConstructor = {
 }
 
 export class Stock {
-  errors: string[]
+  errors = [] as string[]
   stock_id: string
   name: string
   current_price: number

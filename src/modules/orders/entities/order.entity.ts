@@ -27,7 +27,7 @@ export class Order {
   item_type: 'STOCKS' | 'REITS' | 'ETFS'
   situation: keyof typeof OrderSitatuationEnum
   wallet_id: string
-  errors: string[]
+  errors: string[] = []
 
   constructor(props: TOrderEntityConstructor) {
     this.order_id = props.order_id ?? generateUUID()

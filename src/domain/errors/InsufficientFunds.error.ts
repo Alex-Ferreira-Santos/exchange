@@ -1,6 +1,8 @@
-export class InsufficientFundsError extends Error {
+import { BadRequestException } from "@nestjs/common"
+
+export class InsufficientFundsError extends BadRequestException {
   constructor() {
-    super()
+    super(`Insufficient Funds on your wallet`)
     this.message = `Insufficient Funds on your wallet`
     this.name = 'InsufficientFundsError'
   }

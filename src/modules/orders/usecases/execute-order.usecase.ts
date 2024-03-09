@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { BadRequestException, Injectable } from '@nestjs/common'
 import { OrderRepository } from '../repositories/order.repository'
 import { Order } from '../entities/order.entity'
 import { WalletRepository } from 'src/modules/wallets/repositories/wallet.repository'
@@ -14,6 +14,10 @@ export class ExecuteOrderUseCase {
 
   async execute(order_id: string) {
     const foundOrder = await this.orderRepository.getOrderById(order_id)
+
+    if(foundOrder.situation !== 'OPEN'){
+      throw new BadRequestException('Only open orders can be executed')
+    }
 
     const order = new Order(foundOrder)
 
