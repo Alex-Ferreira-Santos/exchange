@@ -19,17 +19,18 @@ model Client {
   email      String   @unique
   identifier String   @unique
   wallets    Wallet[]
-  Order      Order[]
 }
 
 model Wallet {
   wallet_id     String          @id @default(uuid())
   name          String
+  balance       Int             @default(0)
   client_id     String
   client        Client          @relation(fields: [client_id], references: [client_id])
   wallet_stocks Wallet_Stocks[]
   Wallet_Reits  Wallet_Reits[]
   Wallet_ETFS   Wallet_ETFS[]
+  Order         Order[]
 }
 
 model Wallet_Stocks {
@@ -110,8 +111,8 @@ model Order {
   item_type      OrderItemsType
   situation      OrderSituation
 
-  client_id String
-  client    Client @relation(fields: [client_id], references: [client_id])
+  wallet_id String
+  wallet    Wallet @relation(fields: [wallet_id], references: [wallet_id])
 }
 
 enum OrderType {
