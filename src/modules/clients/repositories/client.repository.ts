@@ -17,7 +17,7 @@ export class ClientRepository {
         hash_rf: client.hash_rf
       }
     })
-    const {hash, hash_rf, ...rest} = createdClient
+    const { hash, hash_rf, ...rest } = createdClient
     return rest
   }
 
@@ -25,6 +25,15 @@ export class ClientRepository {
     const foundClient = await this.prismaService.client.findFirstOrThrow({
       where: {
         client_id: { equals: client_id }
+      }
+    })
+    return foundClient
+  }
+
+  async getClientByEmail(email: string) {
+    const foundClient = await this.prismaService.client.findUnique({
+      where: {
+        email
       }
     })
     return foundClient

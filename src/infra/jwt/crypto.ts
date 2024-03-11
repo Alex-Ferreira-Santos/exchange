@@ -16,6 +16,10 @@ export class JWT {
     return bcrypt.hash(data, 10)
   }
 
+  compare(data: string, encryptedString: string){
+    return bcrypt.compare(data, encryptedString)
+  }
+
   async generateToken<T extends object>(props: TGenerateTokenProps<T>) {
     const token = await this.jwtService.signAsync(props.data, {
       secret: props.secret,
@@ -24,4 +28,5 @@ export class JWT {
 
     return token
   }
+
 }

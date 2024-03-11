@@ -12,7 +12,7 @@ export class AuthController {
     
     ) {}
 
-  @Post()
+  @Post('/signin')
   signin(@Body() signInDTO: SignInDTO) {
     return this.signInUseCase.execute(signInDTO)
   }
