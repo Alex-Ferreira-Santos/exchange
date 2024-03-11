@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config'
 import { WalletsModule } from './modules/wallets/wallets.module'
 import { StocksModule } from './modules/stocks/stocks.module';
 import { OrdersModule } from './modules/orders/orders.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { OrdersModule } from './modules/orders/orders.module';
     PrismaModule,
     WalletsModule,
     StocksModule,
-    OrdersModule
+    OrdersModule,
+    AuthModule
   ],
   controllers: [],
   providers: []

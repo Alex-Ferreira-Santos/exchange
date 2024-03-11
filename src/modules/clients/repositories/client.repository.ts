@@ -12,10 +12,13 @@ export class ClientRepository {
         name: client.name,
         email: client.email,
         identifier: client.identifier,
-        client_id: client.client_id
+        client_id: client.client_id,
+        hash: client.hash,
+        hash_rf: client.hash_rf
       }
     })
-    return createdClient
+    const {hash, hash_rf, ...rest} = createdClient
+    return rest
   }
 
   async getClientById(client_id: string) {
