@@ -14,13 +14,16 @@ import { SignUpDTO } from './dto/signup.dto'
 import { AuthGuard } from '@nestjs/passport'
 import { Request } from 'express'
 import { LogoutUseCase } from './usecases/logout.usecase'
+import { RefreshUseCase } from './usecases/refresh.usecase'
+import { GetUser } from './decorators/get-user.decorator'
 
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly signInUseCase: SignInUseCase,
     private readonly signUpUseCase: SignUpUseCase,
-    private readonly logoutUseCase: LogoutUseCase
+    private readonly logoutUseCase: LogoutUseCase,
+    private readonly refreshUseCase: RefreshUseCase
   ) {}
 
   @HttpCode(HttpStatus.OK)
@@ -37,16 +40,17 @@ export class AuthController {
   @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.OK)
   @Post('/logout')
-  logout(@Req() req: Request) {
-    const client_id = req.user?.['sub']
-
+  logout(@GetUser('sub') client_id: string) {
     return this.logoutUseCase.execute(client_id)
   }
 
   @UseGuards(AuthGuard('jwt-refresh'))
   @HttpCode(HttpStatus.OK)
   @Post('/refresh')
-  refresh(@Body() signUpDTO: SignUpDTO) {
-    return this.signUpUseCase.execute(signUpDTO)
+  refresh(
+    @GetUser('sub') client_id: string,
+    @GetUser('refreshToken') refresh_token: string
+  ) {
+    return this.refreshUseCase.execute(client_id, refresh_token)
   }
 }

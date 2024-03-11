@@ -1,3 +1,4 @@
+import { JWT } from 'src/infra/jwt/crypto'
 import { generateUUID } from 'src/infra/uuid'
 
 type TClientEntityConstructor = {

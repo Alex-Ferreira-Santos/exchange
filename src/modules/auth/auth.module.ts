@@ -9,6 +9,7 @@ import { ClientRepository } from '../clients/repositories/client.repository'
 import { JWT } from 'src/infra/jwt/crypto'
 import { AuthRepository } from './repositories/auth.repository'
 import { LogoutUseCase } from './usecases/logout.usecase'
+import { RefreshUseCase } from './usecases/refresh.usecase'
 
 @Module({
   imports: [JwtModule.register({})],
@@ -20,8 +21,9 @@ import { LogoutUseCase } from './usecases/logout.usecase'
     RefreshTokenStrategy,
     ClientRepository,
     AuthRepository,
-    JWT,
-    LogoutUseCase
+    LogoutUseCase,
+    RefreshUseCase,
+    JWT
   ]
 })
 export class AuthModule {}
