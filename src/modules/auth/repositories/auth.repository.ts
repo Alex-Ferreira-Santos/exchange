@@ -18,4 +18,16 @@ export class AuthRepository {
     const { hash, hash_rf, ...rest } = createdClient
     return rest
   }
+
+  async removeClientRefreshToken(client_id: string) {
+    await this.prismaService.client.updateMany({
+      where: {
+        client_id: client_id ?? '',
+        hash_rf: { not: null }
+      },
+      data: {
+        hash_rf: null
+      }
+    })
+  }
 }
